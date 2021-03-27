@@ -7,22 +7,118 @@
   <title>Ángela G. V.</title>
 </head>
 <body>
-  <div class="wip">
-    <div class="wip-title">In the making...</div>
-    <div class="wip-subtitle">Good things take time. 😉</div>
-  </div>
+  <section class="intro">
+    <div class="intro-content centered">
+      <img class="intro-portrait" alt="Ángela's portrait" width="205" height="205" src="./portrait.jpg">
+      <div class="intro-text">
+        <h1 class="intro-title">
+          Howdy, I'm Ángela.
+          <span style="display: inline-block; transform: rotate(-30deg)">🖐🏻</span>
+        </h1>
+        <p class="intro-description">
+          A <span class="highlighted">professional translator</span> something something.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, ad culpa! Illum, aliquam ratione aut id consequuntur optio nesciunt voluptatibus laboriosam molestiae iure pariatur veritatis ad sit laborum architecto minus.
+        </p>
+      </div>
+    </div>
+
+    <svg class="intro-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#f4f2f3" fill-opacity="1" d="M0,160L60,160C120,160,240,160,360,170.7C480,181,600,203,720,213.3C840,224,960,224,1080,218.7C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+    </svg>
+  </section>
+
+  <section class="wip">
+    <div class="centered">
+      <div class="wip-title">In the making...</div>
+      <div class="wip-subtitle">Good things take time. 😉</div>
+    </div>
+  </section>
 
   <style>
     body {
-      background-color: #faf4ee;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: #f4f2f3;
+      overflow-x: hidden;
     }
 
-    .wip {
+    .centered {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: system-ui, sans-serif;
+    }
+
+    .highlighted {
+      font-weight: 500;
+    }
+
+    .intro {
+      height: 100vh;
+      background-image: linear-gradient(#b57e79, #5c2a2e);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      transform: rotate(30deg);
+      background-image:
+        radial-gradient(#b57e7911 20%, transparent 50%),
+        radial-gradient(#b57e7911 20%, transparent 50%);
+      background-size: 5px 5px;
+    }
+
+    .intro-waves {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .intro-content {
+      display: flex;
+      flex-direction: row;
+      z-index: 1;
+      padding-bottom: 100px;
+    }
+
+    .intro-text {
+      flex: 1;
+      min-width: 500px;
+      margin-left: 32px;
+    }
+
+    .intro-portrait {
+      border-radius: 50%;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .intro-title {
+      font-size: 40px;
+      font-weight: 500;
+      color: #fff;
+      margin: 0 0 12px 0;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .intro-description {
+      font-size: 18px;
+      line-height: 160%;
+      margin: 0;
+      color: #eee;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .wip {
+      height: 100vh;
+      position: relative;
     }
 
     .wip-title {
