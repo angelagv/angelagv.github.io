@@ -16,7 +16,7 @@
           <span style="display: inline-block; transform: rotate(-30deg)">🖐🏻</span>
         </h1>
         <p class="intro-description">
-          A <b>professional translator</b> something something.
+          A <strong>professional translator</strong> something something.
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, ad culpa! Illum, aliquam ratione aut id consequuntur optio nesciunt voluptatibus laboriosam molestiae iure pariatur veritatis ad sit laborum architecto minus.
         </p>
         <div class="intro-links">
@@ -37,7 +37,7 @@
   </section>
 
   <section class="services">
-    <h2>Here are the services I provide</h2>
+    <h2>Here are the <strong>services</strong> I provide <span class="emoji">🙇🏻‍♀️</span></h2>
     <div class="services-content">
       <ul class="services-titles">
         <li>Translation</li>
@@ -55,7 +55,7 @@
   </section>
 
   <section class="tools">
-    <h2>These are some of the tools I've used</h2>
+    <h2>These are some of the <strong>tools</strong> I've used <span class="emoji">🛠</span></h2>
     <ul class="tools-list">
       <li>
         <a target="_blank" href="https://adobe.com/products/photoshop.html">
@@ -103,13 +103,69 @@
   </section>
 
   <section class="education">
-    <!-- "If you are wondering, I got my education from" on top, bullets with dates and titles below, connected with arrows, with Erasmus indented further -->
-    <!-- Degree, Erasmus, Masters -->
+    <h2>If you are wondering, I got my <strong>education</strong> from <span class="emoji">🎓</span></h2>
+    <ol class="education-list">
+      <li>
+        <div class="bullet">2020</div>
+        <svg class="bullet-connection" xmlns="http://www.w3.org/2000/svg" width="80px" height="100px">
+          <path d="M 20 20 Q 20 52, 40 50 T 60 80" />
+        </svg>
+        <div class="content">
+          <h3>Bachelor of Arts in Multilingual Communication</h3>
+          <h4>University of Geneva, Switzerland</h4>
+        </div>
+      </li>
+      <li style="margin-left: 40px">
+        <div class="bullet">2018</div>
+        <svg class="bullet-connection" xmlns="http://www.w3.org/2000/svg" width="80px" height="100px" style="left: -40px">
+          <path d="M 60 20 Q 60 52, 40 50 T 20 80" />
+        </svg>
+        <div class="content">
+          <h3>Erasmus+ Exchange</h3>
+          <h4>Heriot-Watt University, Scotland</h4>
+        </div>
+      </li>
+      <li>
+        <div class="bullet">2021</div>
+        <div class="content">
+          <h3>Experto en Traducción y Marketing: Transcreación y Publicidad Multilingüe</h3>
+          <h4>ISTRAD (Instituto Superior de Estudios Lingüísticos y Traducción), Spain</h4>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <section class="courses">
-    <!-- "And I intend to keep learning, so Ive also done" on top, bullets with dates and titles below, connected with arrows -->
-    <!-- RAE, AulaSic (romantic translation, subtitling) -->
+    <h2>And I intend to keep learning, so I've also done these <strong>courses</strong> <span class="emoji">📚</span></h2>
+    <ol class="courses-list education-list">
+      <li>
+        <div class="bullet">2020</div>
+        <svg class="bullet-connection" xmlns="http://www.w3.org/2000/svg" width="40px" height="100px">
+          <path d="M 20 20 L 20 80" />
+        </svg>
+        <div class="content">
+          <h3>Curso en traducción romántica y erótica</h3>
+          <h4>AulaSIC</h4>
+        </div>
+      </li>
+      <li>
+        <div class="bullet">2020</div>
+        <svg class="bullet-connection" xmlns="http://www.w3.org/2000/svg" width="40px" height="100px">
+          <path d="M 20 20 L 20 80" />
+        </svg>
+        <div class="content">
+          <h3>Corrección ortográfica: la puntuación</h3>
+          <h4>Cursiva (RAE)</h4>
+        </div>
+      </li>
+      <li>
+        <div class="bullet">2021</div>
+        <div class="content">
+          <h3>Traducción audiovisual: Subtitulado</h3>
+          <h4>AulaSIC</h4>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <section class="experience">
@@ -134,19 +190,24 @@
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
+      color: #111;
       background-color: #f4f2f3;
       overflow-x: hidden;
+    }
+
+    ::selection {
+      background-color: #ab6bb044;
     }
 
     a {
       text-decoration: none;
     }
 
-    b {
-      font-weight: 500;
+    strong {
+      font-weight: 600;
     }
 
-    ul {
+    ul, ol {
       list-style: none;
       margin: 0;
       padding: 0;
@@ -159,7 +220,25 @@
     }
 
     section h2 {
+      display: inline-block;
       font-weight: 400;
+      position: relative;
+    }
+
+    section h2::before {
+      content: '';
+      height: 10px;
+      width: calc(100% + 10px);
+      border-radius: 16px;
+      position: absolute;
+      top: 19px;
+      left: -5px;
+      z-index: -1;
+      background-color: #89559922;
+    }
+
+    section h2 .emoji {
+      margin-left: 4px;
     }
 
     .centered {
@@ -212,14 +291,14 @@
     }
 
     .intro-portrait {
-      border-radius: 50%;
+      border-radius: 128px;
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
 
     .intro-title {
       font-size: 40px;
       font-weight: 500;
-      color: #fff;
+      color: #eee;
       margin: 0 0 12px 0;
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
@@ -237,7 +316,7 @@
     }
 
     .intro-links * {
-      color: white;
+      color: #eee;
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
 
@@ -334,8 +413,8 @@
 
     .tools-list li a:hover {
       filter: none;
-      color: #000;
-      background-color: #e0e0e0;
+      color: #111;
+      background-color: #41256522;
     }
 
     .tools-list li a img {
@@ -345,6 +424,59 @@
 
     .creator-studio-logo {
       border-radius: 5px;
+    }
+
+    .education-list li {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .education-list li:first-of-type {
+      margin-top: 0;
+    }
+
+    .education-list li:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .education-list li .bullet {
+      display: inline-block;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 64px;
+      color: rgba(255, 255, 255, 0.85);
+      background-image: linear-gradient(#ab6bb0, #895599);
+    }
+
+    .bullet-connection {
+      position: absolute;
+      z-index: -1;
+      stroke-width: 8;
+      stroke: #89559944;
+      fill: transparent;
+    }
+
+    .education-list li .content {
+      margin-left: 14px;
+    }
+
+    .education-list li h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    .education-list li h4 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: normal;
+      color: #555;
     }
 
     .wip {
