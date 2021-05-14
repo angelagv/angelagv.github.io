@@ -539,8 +539,8 @@
       width: calc(100% + 10px);
       border-radius: 16px;
       position: absolute;
-      top: 19px;
       left: -5px;
+      bottom: 3px;
       z-index: -1;
       background-color: #e0cde1;
     }
@@ -565,7 +565,7 @@
     .intro-waves {
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -1px;
       z-index: 1;
     }
 
@@ -587,6 +587,33 @@
       margin-left: 35px;
       color: #eee;
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
+    }
+
+    @media (max-width: 850px) {
+      .intro-content {
+        flex-direction: column;
+      }
+
+      .intro-portrait {
+        margin: 0 auto 32px auto;
+      }
+
+      .intro-title,
+      .intro-description,
+      .intro-links {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .intro-text {
+        width: 70vw;
+        min-width: 300px;
+      }
+
+      .intro-links {
+        min-width: max-content;
+      }
     }
 
     .intro-portrait {
@@ -803,6 +830,11 @@
       position: relative;
     }
 
+    .outro-waves {
+      position: relative;
+      top: -1px;
+    }
+
     .outro .contact-area {
       display: flex;
       flex-direction: row;
@@ -810,6 +842,18 @@
       margin-top: 25px;
       color: #eee;
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
+    }
+
+    @media (max-width: 820px) {
+      .outro .contact-area {
+        width: 65vw;
+        min-width: 300px;
+        flex-direction: column;
+      }
+
+      .outro .contact-side {
+        margin: 0 16px 32px 16px;
+      }
     }
 
     .outro h2 {
@@ -974,6 +1018,7 @@
 
     renderPageBasedOnUrl()
     window.onpopstate = () => renderPageBasedOnUrl()
+    window.onresize = () => renderPageBasedOnUrl()
 
     englishPage.querySelector('.lang-button').onclick = () => {
       spanishPage.hidden = false
