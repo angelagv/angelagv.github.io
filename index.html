@@ -736,12 +736,11 @@
       contactSubmitText.hidden = true
       contactLoader.hidden = false
 
-      new Promise((resolve, reject) => setTimeout(reject, 512))
-      // emailjs
-      //   .send('rlIdkOSgYe0ZgbpgfRmzDLyU', '3OSLQf2VuXRCGsRfHNbd7G0I', {
-      //     reply_to: contactFrom.value,
-      //     message: contactBody.value
-      //   })
+      emailjs
+        .send('rlIdkOSgYe0ZgbpgfRmzDLyU', '3OSLQf2VuXRCGsRfHNbd7G0I', {
+          reply_to: contactFrom.value,
+          message: contactBody.value
+        })
         .then(() => {
           contactFrom.value = contactBody.value = ''
           contactResult.textContent = 'Message sent! I will read it soon 🙂'
