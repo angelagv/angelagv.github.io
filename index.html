@@ -976,6 +976,7 @@
   </style>
 
   <script>
+    const { body } = document
     const englishPage = document.querySelector('main[lang=en]')
     const spanishPage = document.querySelector('main[lang=es]')
 
@@ -1017,25 +1018,25 @@
     let bodyShiftStep
 
     renderPageBasedOnUrl()
-    window.onpopstate = () => renderPageBasedOnUrl()
-    window.onresize = () => renderPageBasedOnUrl()
+    window.onpopstate = renderPageBasedOnUrl
+    window.onresize = renderPageBasedOnUrl
 
     englishPage.querySelector('.lang-button').onclick = () => {
       spanishPage.hidden = false
       setBodyShiftStep()
       setUrlLang('es', false)
-      window.requestAnimationFrame(slideToSpanishPage)
+      requestAnimationFrame(slideToSpanishPage)
     }
 
     spanishPage.querySelector('.lang-button').onclick = () => {
       englishPage.hidden = false
       setBodyShiftStep()
       setUrlLang('en', false)
-      window.requestAnimationFrame(slideToEnglishPage)
+      requestAnimationFrame(slideToEnglishPage)
     }
 
     function setBodyShiftStep() {
-      bodyShiftStep = Math.ceil(window.innerWidth / 120)
+      bodyShiftStep = Math.ceil(window.innerWidth / 90)
     }
 
     function setUrlLang(lang, replace) {
@@ -1050,20 +1051,20 @@
 
     function slideToSpanishPage() {
       bodyShift = Math.min(100, bodyShift + bodyShiftStep)
-      document.body.style.left = `-${bodyShift}vw`
+      body.style.left = `-${bodyShift}vw`
 
       if (bodyShift < 100)
-        window.requestAnimationFrame(slideToSpanishPage)
+        requestAnimationFrame(slideToSpanishPage)
       else
         renderSpanishPage()
     }
 
     function slideToEnglishPage() {
       bodyShift = Math.max(0, bodyShift - bodyShiftStep)
-      document.body.style.left = `-${bodyShift}vw`
+      body.style.left = `-${bodyShift}vw`
 
       if (bodyShift > 0)
-        window.requestAnimationFrame(slideToEnglishPage)
+        requestAnimationFrame(slideToEnglishPage)
       else
         renderEnglishPage()
     }
@@ -1083,17 +1084,17 @@
     function renderEnglishPage() {
       englishPage.hidden = false
       spanishPage.hidden = true
-      connectExperienceBullets(englishPage)
       bodyShift = 0
-      document.body.style.left = '' + bodyShift
+      body.style.left = '' + bodyShift
+      connectExperienceBullets(englishPage)
     }
 
     function renderSpanishPage() {
       englishPage.hidden = true
       spanishPage.hidden = false
-      connectExperienceBullets(spanishPage)
       bodyShift = 100
-      document.body.style.left = `-${bodyShift}vw`
+      body.style.left = `-${bodyShift}vw`
+      connectExperienceBullets(spanishPage)
     }
 
     function connectExperienceBullets(page) {
