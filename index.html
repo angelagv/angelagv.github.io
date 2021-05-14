@@ -931,89 +931,12 @@
   </style>
 
   <script>
-    const englishMain = document.querySelector('main[lang=en]')
-    const spanishMain = document.querySelector('main[lang=es]')
+    const englishPage = document.querySelector('main[lang=en]')
+    const spanishPage = document.querySelector('main[lang=es]')
 
-    let bodyShift = 0
-    let bodyShiftStep = 16
-
-    const params = new URLSearchParams(window.location.search)
-    let urlLang = params.get('lang')
-    if (!urlLang) {
-      urlLang = 'en'
-      const params = new URLSearchParams(window.location.search)
-      params.set('lang', 'en')
-      history.replaceState(null, 'Ángela G. V. – English', '?' + params.toString())
-    }
-
-    if (urlLang === 'es') {
-      spanishMain.hidden = false
-      connectExperienceBullets(spanishMain)
-    } else {
-      englishMain.hidden = false
-      connectExperienceBullets(englishMain)
-    }
-
-    bodyShift = urlLang === 'es' ? 100 : 0
-    document.body.style.left = `-${bodyShift}vw`
-
-    window.onpopstate = ev => {
-      const params = new URLSearchParams(window.location.search)
-      const urlLang = params.get('lang')
-      document.body.style.left = urlLang === 'en' ? '0' : '-100vw'
-    }
-
-    function setUrlLang(lang) {
-      const params = new URLSearchParams(window.location.search)
-      params.set('lang', lang)
-      history.pushState(null, 'Ángela G. V. – ' + (lang === 'en' ? 'English' : 'Spanish'), '?' + params.toString())
-    }
-
-    function setBodyShiftStep() {
-      bodyShiftStep = Math.ceil(window.innerWidth / 120)
-    }
-
-    function goToSpanishPage() {
-      bodyShift = Math.min(100, bodyShift + bodyShiftStep)
-      document.body.style.left = `-${bodyShift}vw`
-
-      if (bodyShift < 100)
-        window.requestAnimationFrame(goToSpanishPage)
-      else {
-        englishMain.hidden = true
-        connectExperienceBullets(spanishMain)
-      }
-    }
-
-    function goToEnglishPage() {
-      bodyShift = Math.max(0, bodyShift - bodyShiftStep)
-      document.body.style.left = `-${bodyShift}vw`
-
-      if (bodyShift > 0)
-        window.requestAnimationFrame(goToEnglishPage)
-      else {
-        spanishMain.hidden = true
-        connectExperienceBullets(englishMain)
-      }
-    }
-
-    englishMain.querySelector('.lang-button').onclick = () => {
-      spanishMain.hidden = false
-      setUrlLang('es')
-      setBodyShiftStep()
-      window.requestAnimationFrame(goToSpanishPage)
-    }
-
-    spanishMain.querySelector('.lang-button').onclick = () => {
-      englishMain.hidden = false
-      setUrlLang('en')
-      setBodyShiftStep()
-      window.requestAnimationFrame(goToEnglishPage)
-    }
-
-    for (const main of [englishMain, spanishMain]) {
-      const servicesTitles = Array.from(main.querySelectorAll('.services-titles li'))
-      const servicesDescription = Array.from(main.querySelectorAll('.services-descriptions li'))
+    for (const page of [englishPage, spanishPage]) {
+      const servicesTitles = Array.from(page.querySelectorAll('.services-titles li'))
+      const servicesDescription = Array.from(page.querySelectorAll('.services-descriptions li'))
 
       servicesTitles[0].classList.add('selected')
       servicesDescription[0].classList.add('selected')
@@ -1036,8 +959,99 @@
       })
     }
 
-    function connectExperienceBullets(main) {
-      const experienceList = main.querySelector('.experience-list')
+    for (const anchor of document.querySelectorAll(`a[href^='#']`)) {
+      anchor.onclick = ev => {
+        ev.preventDefault()
+        document
+          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href').replace('#', '.'))
+          .scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+
+    let bodyShift
+    let bodyShiftStep
+
+    renderPageBasedOnUrl()
+    window.onpopstate = () => renderPageBasedOnUrl()
+
+    englishPage.querySelector('.lang-button').onclick = () => {
+      spanishPage.hidden = false
+      setBodyShiftStep()
+      setUrlLang('es', false)
+      window.requestAnimationFrame(slideToSpanishPage)
+    }
+
+    spanishPage.querySelector('.lang-button').onclick = () => {
+      englishPage.hidden = false
+      setBodyShiftStep()
+      setUrlLang('en', false)
+      window.requestAnimationFrame(slideToEnglishPage)
+    }
+
+    function setBodyShiftStep() {
+      bodyShiftStep = Math.ceil(window.innerWidth / 120)
+    }
+
+    function setUrlLang(lang, replace) {
+      const queryParams = new URLSearchParams(window.location.search)
+      queryParams.set('lang', lang)
+      history[replace ? 'replaceState' : 'pushState'](
+        null,
+        `Ángela G. V. – ${lang === 'en' ? 'English' : 'Spanish'}`,
+        '?' + queryParams.toString()
+      )
+    }
+
+    function slideToSpanishPage() {
+      bodyShift = Math.min(100, bodyShift + bodyShiftStep)
+      document.body.style.left = `-${bodyShift}vw`
+
+      if (bodyShift < 100)
+        window.requestAnimationFrame(slideToSpanishPage)
+      else
+        renderSpanishPage()
+    }
+
+    function slideToEnglishPage() {
+      bodyShift = Math.max(0, bodyShift - bodyShiftStep)
+      document.body.style.left = `-${bodyShift}vw`
+
+      if (bodyShift > 0)
+        window.requestAnimationFrame(slideToEnglishPage)
+      else
+        renderEnglishPage()
+    }
+
+    function renderPageBasedOnUrl() {
+      const queryParams = new URLSearchParams(window.location.search)
+      const urlLang = queryParams.get('lang')
+      if (!urlLang)
+        setUrlLang('en', true)
+
+      if (urlLang === 'es')
+        renderSpanishPage()
+      else
+        renderEnglishPage()
+    }
+
+    function renderEnglishPage() {
+      englishPage.hidden = false
+      spanishPage.hidden = true
+      connectExperienceBullets(englishPage)
+      bodyShift = 0
+      document.body.style.left = '' + bodyShift
+    }
+
+    function renderSpanishPage() {
+      englishPage.hidden = true
+      spanishPage.hidden = false
+      connectExperienceBullets(spanishPage)
+      bodyShift = 100
+      document.body.style.left = `-${bodyShift}vw`
+    }
+
+    function connectExperienceBullets(page) {
+      const experienceList = page.querySelector('.experience-list')
       const experienceBullets = Array.from(experienceList.querySelectorAll('.bullet'))
       const experienceBulletConnectionSvgs = Array.from(experienceList.querySelectorAll('.bullet-connection'))
       const experienceBulletConnectionPaths = Array.from(experienceList.querySelectorAll('.bullet-connection path'))
@@ -1048,27 +1062,18 @@
         experienceBulletConnectionPaths[i].setAttribute('d', `M 20 20 L 20 ${diff + 20}`)
       }
     }
-
-    for (const anchor of document.querySelectorAll(`a[href^='#']`)) {
-      anchor.onclick = ev => {
-        ev.preventDefault()
-        document
-          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href').replace('#', '.'))
-          .scrollIntoView({ behavior: 'smooth' })
-      }
-    }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <script>
-    for (const main of [englishMain, spanishMain]) {
-      const contactForm = main.querySelector('.contact-form')
+    for (const page of [englishPage, spanishPage]) {
+      const contactForm = page.querySelector('.contact-form')
       const contactFrom = contactForm.querySelector('[id^=contact-from]')
       const contactBody = contactForm.querySelector('[id^=contact-body]')
       const contactSendBtn = contactForm.querySelector('button[type=submit]')
       const contactLoader = contactForm.querySelector('.contact-loader')
       const contactSubmitText = contactForm.querySelector('.submit-text')
-      const contactResult = main.querySelector('.contact-result')
+      const contactResult = page.querySelector('.contact-result')
 
       emailjs.init('user_xCTlsMd4WvYzCuEwWqCc7')
 
