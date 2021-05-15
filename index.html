@@ -1031,6 +1031,7 @@
     renderPageBasedOnUrl()
     window.onpopstate = renderPageBasedOnUrl
     window.onresize = renderPageBasedOnUrl
+    window.onscroll = () => window.scrollTo(0, window.scrollY)
 
     englishPage.querySelector('.lang-button').onclick = () => {
       spanishPage.hidden = false
