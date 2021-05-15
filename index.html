@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <title>Ángela G. V.</title>
 </head>
 <body>
@@ -942,6 +942,7 @@
     }
 
     .outro .contact-form > button[type=submit]:active {
+      color: rgb(255 255 255 / 50%);
       text-shadow: none;
       background-color: rgb(255 255 255 / 25%) !important;
     }
@@ -1031,7 +1032,10 @@
     renderPageBasedOnUrl()
     window.onpopstate = renderPageBasedOnUrl
     window.onresize = renderPageBasedOnUrl
-    window.onscroll = () => window.scrollTo(0, window.scrollY)
+    window.onscroll = ev => {
+      if (document.documentElement.scrollLeft !== 0)
+        document.documentElement.scrollLeft = 0
+    }
 
     englishPage.querySelector('.lang-button').onclick = () => {
       spanishPage.hidden = false
