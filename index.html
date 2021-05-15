@@ -485,6 +485,7 @@
 
     main {
       width: 100vw;
+      overflow: hidden scroll;
     }
 
     main[lang=es] {
@@ -500,7 +501,8 @@
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
       cursor: pointer;
       position: absolute;
-      top: 8px;
+      top: 0;
+      padding: 14px 16px;
       opacity: 0.5;
     }
 
@@ -508,13 +510,8 @@
       opacity: 1;
     }
 
-    main[lang=en] .lang-button {
-      right: 24px;
-    }
-
-    main[lang=es] .lang-button {
-      left: 8px;
-    }
+    main[lang=en] .lang-button { right: 0 }
+    main[lang=es] .lang-button { left: 0 }
 
     main[lang=en] .intro-waves,
     main[lang=en] .outro-waves {
@@ -598,10 +595,21 @@
         margin: 0 auto 32px auto;
       }
 
+      .intro-text {
+        margin-left: 0;
+        position: relative;
+      }
+
       .intro-title,
-      .intro-description,
-      .intro-links {
+      .intro-description {
         text-align: center;
+      }
+
+      .intro-links {
+        min-width: max-content;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
 
@@ -610,9 +618,11 @@
         width: 70vw;
         min-width: 300px;
       }
+    }
 
-      .intro-links {
-        min-width: max-content;
+    @media (max-width: 550px) {
+      .intro-portrait {
+        margin: 0 auto 16px auto;
       }
     }
 
@@ -848,6 +858,7 @@
       .outro .contact-area {
         width: 65vw;
         min-width: 300px;
+        margin-top: -15px;
         flex-direction: column;
       }
 
@@ -1015,7 +1026,7 @@
     }
 
     let bodyShift
-    let bodyShiftStep
+    const bodyShiftStep = 5
 
     renderPageBasedOnUrl()
     window.onpopstate = renderPageBasedOnUrl
@@ -1023,20 +1034,16 @@
 
     englishPage.querySelector('.lang-button').onclick = () => {
       spanishPage.hidden = false
-      setBodyShiftStep()
+      englishPage.style.overflowY = 'auto'
       setUrlLang('es', false)
       requestAnimationFrame(slideToSpanishPage)
     }
 
     spanishPage.querySelector('.lang-button').onclick = () => {
       englishPage.hidden = false
-      setBodyShiftStep()
+      englishPage.style.overflowY = 'auto'
       setUrlLang('en', false)
       requestAnimationFrame(slideToEnglishPage)
-    }
-
-    function setBodyShiftStep() {
-      bodyShiftStep = Math.ceil(window.innerWidth / 90)
     }
 
     function setUrlLang(lang, replace) {
@@ -1082,6 +1089,7 @@
     }
 
     function renderEnglishPage() {
+      englishPage.style.overflowY = 'scroll'
       englishPage.hidden = false
       spanishPage.hidden = true
       bodyShift = 0
