@@ -9,7 +9,7 @@
 <body>
   <main lang="en" hidden>
     <section class="intro">
-      <button class="lang-button" title="Ver página en español">ES ❯</button>
+      <button class="lang-button" title="Ver página en español"><span class="flag">🇪🇸</span> ES ❯</button>
 
       <div class="intro-content centered">
         <img class="intro-portrait" src="./portrait.jpg" alt="Ángela's picture" width="205" height="205">
@@ -230,7 +230,7 @@
 
   <main lang="es" hidden>
     <section class="intro">
-      <button class="lang-button" title="Go to English version">❮ EN</button>
+      <button class="lang-button" title="Go to English version">❮ EN <span class="flag">🇬🇧</span></button>
 
       <div class="intro-content centered">
         <img class="intro-portrait" src="./portrait.jpg" alt="Ángela's picture" width="205" height="205">
@@ -512,6 +512,13 @@
 
     main[lang=en] .lang-button { right: 0 }
     main[lang=es] .lang-button { left: 0 }
+
+    .lang-button .flag {
+      line-height: 0;
+    }
+
+    main[lang=en] .lang-button .flag { margin-right: 1px }
+    main[lang=es] .lang-button .flag { margin-left: 1px }
 
     main[lang=en] .intro-waves,
     main[lang=en] .outro-waves {
