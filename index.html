@@ -1106,7 +1106,8 @@
       spanishPage.hidden = true
       bodyShift = 0
       body.style.left = '' + bodyShift
-      connectExperienceBullets(englishPage)
+      connectTimelineBullets(englishPage.querySelector('.courses-list'))
+      connectTimelineBullets(englishPage.querySelector('.experience-list'))
 
       englishPage.style.width = '99.99999vw'
       setTimeout(() => englishPage.style.width = '100vw')
@@ -1117,19 +1118,19 @@
       spanishPage.hidden = false
       bodyShift = 100
       body.style.left = `-${bodyShift}vw`
-      connectExperienceBullets(spanishPage)
+      connectTimelineBullets(spanishPage.querySelector('.courses-list'))
+      connectTimelineBullets(spanishPage.querySelector('.experience-list'))
     }
 
-    function connectExperienceBullets(page) {
-      const experienceList = page.querySelector('.experience-list')
-      const experienceBullets = Array.from(experienceList.querySelectorAll('.bullet'))
-      const experienceBulletConnectionSvgs = Array.from(experienceList.querySelectorAll('.bullet-connection'))
-      const experienceBulletConnectionPaths = Array.from(experienceList.querySelectorAll('.bullet-connection path'))
+    function connectTimelineBullets(element) {
+      const bullets = Array.from(element.querySelectorAll('.bullet'))
+      const bulletConnectionSvgs = Array.from(element.querySelectorAll('.bullet-connection'))
+      const bulletConnectionPaths = Array.from(element.querySelectorAll('.bullet-connection path'))
 
-      for (let i = 0; i < experienceBullets.length - 1; ++i) {
-        const diff = experienceBullets[i + 1].getBoundingClientRect().top - experienceBullets[i].getBoundingClientRect().top
-        experienceBulletConnectionSvgs[i].setAttribute('height', diff + 40 + 'px')
-        experienceBulletConnectionPaths[i].setAttribute('d', `M 20 20 L 20 ${diff + 20}`)
+      for (let i = 0; i < bullets.length - 1; ++i) {
+        const diff = bullets[i + 1].getBoundingClientRect().top - bullets[i].getBoundingClientRect().top
+        bulletConnectionSvgs[i].setAttribute('height', diff + 40 + 'px')
+        bulletConnectionPaths[i].setAttribute('d', `M 20 20 L 20 ${diff + 20}`)
       }
     }
   </script>
