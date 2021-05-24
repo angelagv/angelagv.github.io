@@ -8,7 +8,7 @@
 </head>
 <body>
   <main lang="en" hidden>
-    <section class="intro">
+    <section class="intro" id="intro-en">
       <button class="lang-button" title="Ver página en español"><span class="flag">🇪🇸</span> ES ❯</button>
 
       <div class="intro-content centered">
@@ -23,7 +23,7 @@
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, ad culpa! Illum, aliquam ratione aut id consequuntur optio nesciunt voluptatibus laboriosam molestiae iure pariatur veritatis ad sit laborum architecto minus.
           </p>
           <div class="intro-links">
-            <a href="#contact-form">Contact</a>
+            <a href="#contact-form-en" title="Scroll down to contact form">Contact</a>
             <span>·</span>
             <a href="#">CV</a>
             <span>·</span>
@@ -203,11 +203,16 @@
       <div class="outro-content centered">
         <div class="contact-area">
           <div class="contact-side">
-            <h2><span class="contact-title-content">Reach out! <span class="emoji">📝</span></span></h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti eum, accusamus labore id vel molestias nihil a quisquam adipisci harum?</p>
+            <div class="contact-message">
+              <h2><span class="contact-title-content">Reach out! <span class="emoji">📝</span></span></h2>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti eum, accusamus labore id vel molestias nihil a quisquam adipisci harum?</p>
+            </div>
+            <div class="back-to-top-link">
+              <a href="#intro-en">Back to top ↑</a>
+            </div>
           </div>
           <div class="contact-main">
-            <form class="contact-form">
+            <form class="contact-form" id="contact-form-en">
               <label for="contact-from-en">Email</label>
               <input id="contact-from-en" type="email" required>
               <label for="contact-body-en">Message</label>
@@ -229,7 +234,7 @@
   </main>
 
   <main lang="es" hidden>
-    <section class="intro">
+    <section class="intro" id="intro-es">
       <button class="lang-button" title="Go to English version">❮ EN <span class="flag">🇬🇧</span></button>
 
       <div class="intro-content centered">
@@ -244,7 +249,7 @@
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, ad culpa! Illum, aliquam ratione aut id consequuntur optio nesciunt voluptatibus laboriosam molestiae iure pariatur veritatis ad sit laborum architecto minus.
           </p>
           <div class="intro-links">
-            <a href="#contact-form">Contact</a>
+            <a href="#contact-form-es" title="Scroll down to contact form">Contact</a>
             <span>·</span>
             <a href="#">CV</a>
             <span>·</span>
@@ -424,11 +429,16 @@
       <div class="outro-content centered">
         <div class="contact-area">
           <div class="contact-side">
-            <h2><span class="contact-title-content">Reach out! <span class="emoji">📝</span></span></h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti eum, accusamus labore id vel molestias nihil a quisquam adipisci harum?</p>
+            <div class="contact-message">
+              <h2><span class="contact-title-content">Reach out! <span class="emoji">📝</span></span></h2>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti eum, accusamus labore id vel molestias nihil a quisquam adipisci harum?</p>
+            </div>
+            <div class="back-to-top-link">
+              <a href="#intro-es">Back to top ↑</a>
+            </div>
           </div>
           <div class="contact-main">
-            <form class="contact-form">
+            <form class="contact-form" id="contact-form-es">
               <label for="contact-from">Email</label>
               <input id="contact-from-es" type="email" required>
               <label for="contact-body">Message</label>
@@ -593,6 +603,43 @@
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
     }
 
+    .intro-portrait {
+      border-radius: 128px;
+      box-shadow: 0 1px 5px rgb(0 0 0 / 40%);
+    }
+
+    .intro-title {
+      font-size: 40px;
+      font-weight: 500;
+      margin: 0 0 12px 0;
+    }
+
+    .intro-description {
+      font-size: 18px;
+      line-height: 160%;
+      margin: 0;
+    }
+
+    .intro-links {
+      margin-top: 20px;
+    }
+
+    .intro-links * {
+      color: #eee;
+    }
+
+    .intro-links *:not(:last-child) {
+      margin-right: 16px;
+    }
+
+    .intro-links a {
+      opacity: 0.5;
+    }
+
+    .intro-links a:hover {
+      opacity: 1;
+    }
+
     @media (max-width: 850px) {
       .intro-content {
         flex-direction: column;
@@ -631,43 +678,6 @@
       .intro-portrait {
         margin: 0 auto 16px auto;
       }
-    }
-
-    .intro-portrait {
-      border-radius: 128px;
-      box-shadow: 0 1px 5px rgb(0 0 0 / 40%);
-    }
-
-    .intro-title {
-      font-size: 40px;
-      font-weight: 500;
-      margin: 0 0 12px 0;
-    }
-
-    .intro-description {
-      font-size: 18px;
-      line-height: 160%;
-      margin: 0;
-    }
-
-    .intro-links {
-      margin-top: 20px;
-    }
-
-    .intro-links * {
-      color: #eee;
-    }
-
-    .intro-links *:not(:last-child) {
-      margin-right: 16px;
-    }
-
-    .intro-links a {
-      opacity: 0.5;
-    }
-
-    .intro-links a:hover {
-      opacity: 1;
     }
 
     .services-content {
@@ -718,24 +728,6 @@
       gap: 12px;
     }
 
-    @media (max-width: 750px) {
-      .tools-list {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 550px) {
-      .tools-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 370px) {
-      .tools-list {
-        grid-template-columns: auto;
-      }
-    }
-
     .tools-list li a {
       display: inline-block;
       width: 100%;
@@ -757,6 +749,24 @@
     .tools-list li a img {
       vertical-align: -6px;
       margin-right: 4px;
+    }
+
+    @media (max-width: 750px) {
+      .tools-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 550px) {
+      .tools-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 370px) {
+      .tools-list {
+        grid-template-columns: auto;
+      }
     }
 
     .creator-studio-logo {
@@ -857,21 +867,12 @@
       flex-direction: row;
       width: 700px;
       margin-top: 25px;
-      color: #eee;
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
     }
 
-    @media (max-width: 820px) {
-      .outro .contact-area {
-        width: 65vw;
-        min-width: 300px;
-        margin-top: -15px;
-        flex-direction: column;
-      }
-
-      .outro .contact-side {
-        margin: 0 16px 32px 16px;
-      }
+    .outro .contact-area,
+    .outro .contact-area a {
+      color: #eee;
     }
 
     .outro h2 {
@@ -889,7 +890,25 @@
 
     .outro .contact-area > .contact-side {
       flex: 0.75;
-      margin-right: 16px;
+      margin: 0 16px 7px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .outro .contact-area > .contact-side > .back-to-top-link {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      font-size: 15px;
+    }
+
+    .outro .contact-area > .contact-side > .back-to-top-link a {
+      opacity: 0.5;
+    }
+
+    .outro .contact-area > .contact-side > .back-to-top-link a:hover {
+      opacity: 1;
     }
 
     .outro .contact-area > .contact-side p {
@@ -992,6 +1011,25 @@
       color: #fff;
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
     }
+
+    @media (max-width: 820px) {
+      .outro .contact-area {
+        width: 65vw;
+        min-width: 300px;
+        margin-top: -15px;
+        flex-direction: column;
+      }
+
+      .outro .contact-area > .contact-side {
+        margin: 0 16px 16px 16px;
+      }
+
+      .outro .contact-area > .contact-side > .back-to-top-link a {
+        flex: 1;
+        text-align: right;
+        margin-top: 8px;
+      }
+    }
   </style>
 
   <script>
@@ -1028,7 +1066,7 @@
       anchor.onclick = ev => {
         ev.preventDefault()
         document
-          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href').replace('#', '.'))
+          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href'))
           .scrollIntoView({ behavior: 'smooth' })
       }
     }
