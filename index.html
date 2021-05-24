@@ -581,9 +581,9 @@
     }
 
     .intro-waves {
-      width: calc(100% + 1px); /* Safari leaves 1 pixel between the waves and the scrollbar. */
+      width: calc(100% + 2px); /* Safari leaves pixels between the waves and the page boundaries. */
       position: absolute;
-      left: 0;
+      left: -1px;
       bottom: -1px;
       z-index: 1;
     }
