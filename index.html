@@ -223,7 +223,7 @@
               </button>
               <div style="clear: both"></div>
             </form>
-            <div class="contact-result"></div>
+            <div class="contact-result">&nbsp;</div>
           </div>
         </div>
       </div>
@@ -449,7 +449,7 @@
               </button>
               <div style="clear: both"></div>
             </form>
-            <div class="contact-result"></div>
+            <div class="contact-result">&nbsp;</div>
           </div>
         </div>
       </div>
@@ -897,7 +897,7 @@
 
     .outro .contact-area > .contact-side {
       flex: 0.75;
-      margin: 0 16px 7px 0;
+      margin: 0 16px 23px 0;
       display: flex;
       flex-direction: column;
     }
@@ -988,6 +988,11 @@
       transition: opacity 1s;
     }
 
+    .outro .contact-result.active {
+      opacity: 1;
+      transition: opacity 0.2s;
+    }
+
     .outro .contact-loader {
       border: 2px solid rgb(255 255 255 / 50%);
       border-top: 2px solid #80008080;
@@ -1001,11 +1006,6 @@
     @keyframes spin {
       0% { transform: rotate(0deg) }
       100% { transform: rotate(360deg) }
-    }
-
-    .outro .contact-result.active {
-      opacity: 1;
-      transition: opacity 0.2s;
     }
 
     .outro .small-print {
@@ -1031,9 +1031,8 @@
         margin: 0 16px 16px 16px;
       }
 
-      .outro .contact-area > .contact-side > .back-to-top-link a {
-        flex: 1;
-        text-align: right;
+      .outro .contact-area > .contact-side > .back-to-top-link {
+        flex-direction: column;
         margin-top: 8px;
       }
     }
