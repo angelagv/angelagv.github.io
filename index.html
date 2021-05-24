@@ -465,7 +465,7 @@
       margin: 0;
       color: #111;
       background-color: #f4f2f3;
-      overflow-x: hidden;
+      overflow: hidden scroll;
       position: relative;
     }
 
@@ -577,6 +577,7 @@
     }
 
     .intro-waves {
+      width: calc(100% + 1px); /* Safari leaves 1 pixel between the waves and the scrollbar. */
       position: absolute;
       left: 0;
       bottom: -1px;
@@ -859,7 +860,13 @@
 
     .outro-waves {
       position: relative;
+      left: 0;
       top: -1px;
+      width: calc(100% + 5px);
+    }
+
+    main[lang=es] .outro-waves {
+      left: -5px;
     }
 
     .outro .contact-area {
@@ -1036,6 +1043,7 @@
     const { body } = document
     const englishPage = document.querySelector('main[lang=en]')
     const spanishPage = document.querySelector('main[lang=es]')
+    const belowFoldSections = document.querySelectorAll(`section:not(.intro)`)
 
     for (const page of [englishPage, spanishPage]) {
       const servicesTitles = Array.from(page.querySelectorAll('.services-titles li'))
@@ -1083,27 +1091,19 @@
     }
 
     englishPage.querySelector('.lang-button').onclick = () => {
+      hideBelowFoldSections()
+      englishPage.style.overflowY = 'hidden' // Hide left scrollbar before sliding.
       spanishPage.hidden = false
-      englishPage.style.overflowY = 'auto'
       setUrlLang('es', false)
       slideToSpanishPage()
     }
 
     spanishPage.querySelector('.lang-button').onclick = () => {
+      hideBelowFoldSections()
+      englishPage.style.overflowY = 'hidden' // Hide left scrollbar before sliding.
       englishPage.hidden = false
-      englishPage.style.overflowY = 'auto'
       setUrlLang('en', false)
       slideToEnglishPage()
-    }
-
-    function setUrlLang(lang, replace) {
-      const queryParams = new URLSearchParams(window.location.search)
-      queryParams.set('lang', lang)
-      history[replace ? 'replaceState' : 'pushState'](
-        null,
-        `Ángela G. V. – ${lang === 'en' ? 'English' : 'Spanish'}`,
-        '?' + queryParams.toString()
-      )
     }
 
     function slideToSpanishPage() {
@@ -1111,7 +1111,7 @@
       body.style.left = `-${bodyShift}vw`
 
       if (bodyShift < 100)
-        setTimeout(slideToSpanishPage)
+        requestAnimationFrame(slideToSpanishPage)
       else
         renderSpanishPage()
     }
@@ -1121,9 +1121,48 @@
       body.style.left = `-${bodyShift}vw`
 
       if (bodyShift > 0)
-        setTimeout(slideToEnglishPage)
+        requestAnimationFrame(slideToEnglishPage)
       else
         renderEnglishPage()
+    }
+
+    function renderEnglishPage() {
+      englishPage.style.overflowY = 'scroll'
+      englishPage.hidden = false
+      spanishPage.hidden = true
+      bodyShift = 0
+      body.style.left = '' + bodyShift
+      showBelowFoldSections()
+      connectTimelineBullets(englishPage.querySelector('.courses-list'))
+      connectTimelineBullets(englishPage.querySelector('.experience-list'))
+      forceEnglishPageReflow()
+    }
+
+    function renderSpanishPage() {
+      englishPage.hidden = true
+      spanishPage.hidden = false
+      bodyShift = 100
+      body.style.left = `-${bodyShift}vw`
+      showBelowFoldSections()
+      connectTimelineBullets(spanishPage.querySelector('.courses-list'))
+      connectTimelineBullets(spanishPage.querySelector('.experience-list'))
+    }
+
+    // Force a reflow so that Safari takes into account the scrollbar
+    // when calculating the layout in the same way as after a refresh.
+    function forceEnglishPageReflow() {
+      englishPage.style.width = '99.99999vw'
+      setTimeout(() => englishPage.style.width = '100vw')
+    }
+
+    function showBelowFoldSections() {
+      for (const section of belowFoldSections)
+        section.hidden = false
+    }
+
+    function hideBelowFoldSections() {
+      for (const section of belowFoldSections)
+        section.hidden = true
     }
 
     function renderPageBasedOnUrl() {
@@ -1138,26 +1177,14 @@
         renderEnglishPage()
     }
 
-    function renderEnglishPage() {
-      englishPage.style.overflowY = 'scroll'
-      englishPage.hidden = false
-      spanishPage.hidden = true
-      bodyShift = 0
-      body.style.left = '' + bodyShift
-      connectTimelineBullets(englishPage.querySelector('.courses-list'))
-      connectTimelineBullets(englishPage.querySelector('.experience-list'))
-
-      englishPage.style.width = '99.99999vw'
-      setTimeout(() => englishPage.style.width = '100vw')
-    }
-
-    function renderSpanishPage() {
-      englishPage.hidden = true
-      spanishPage.hidden = false
-      bodyShift = 100
-      body.style.left = `-${bodyShift}vw`
-      connectTimelineBullets(spanishPage.querySelector('.courses-list'))
-      connectTimelineBullets(spanishPage.querySelector('.experience-list'))
+    function setUrlLang(lang, replace) {
+      const queryParams = new URLSearchParams(window.location.search)
+      queryParams.set('lang', lang)
+      history[replace ? 'replaceState' : 'pushState'](
+        null,
+        `Ángela G. V. – ${lang === 'en' ? 'English' : 'Spanish'}`,
+        '?' + queryParams.toString()
+      )
     }
 
     function connectTimelineBullets(element) {
