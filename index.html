@@ -227,7 +227,10 @@
             </div>
           </div>
           <div class="contact-main">
-            <form class="contact-form" id="contact-form-en">
+            <iframe data-tally-src="https://tally.so/embed/wgyBvd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1" loading="lazy" width="100%" height="0" frameborder="0" marginheight="0" marginwidth="0" title="Contact form
+"></iframe>
+            
+            <!-- <form class="contact-form" id="contact-form-en">
               <label for="contact-from-en">Email</label>
               <input id="contact-from-en" type="email" required>
               <label for="contact-body-en">Message</label>
@@ -238,7 +241,7 @@
               </button>
               <div style="clear: both"></div>
             </form>
-            <div class="contact-result">&nbsp;</div>
+            <div class="contact-result">&nbsp;</div> -->
           </div>
         </div>
       </div>
@@ -468,7 +471,11 @@
               <a href="#intro-es">Tira parriba ↑</a>
             </div>
           </div>
-          <div class="contact-main">
+          <div class="contact-main"> 
+            <iframe data-tally-src="https://tally.so/embed/wgyBvd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1" loading="lazy" width="100%" height="0" frameborder="0" marginheight="0" marginwidth="0" title="Contact form
+"></iframe>
+
+            <!--
             <form class="contact-form" id="contact-form-es">
               <label for="contact-from">Correo electrónico</label>
               <input id="contact-from-es" type="email" required>
@@ -481,6 +488,7 @@
               <div style="clear: both"></div>
             </form>
             <div class="contact-result">&nbsp;</div>
+            -->
           </div>
         </div>
       </div>
@@ -992,6 +1000,7 @@
       flex: 1;
     }
 
+    /*
     .outro .contact-form {
       padding: 16px;
       border-radius: 6px;
@@ -1066,6 +1075,7 @@
       margin: 0 auto;
       animation: spin 1s linear infinite;
     }
+    */
 
     @keyframes spin {
       0% { transform: rotate(0deg) }
@@ -1311,8 +1321,9 @@
     }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script> -->
   <script>
+    /*
     for (const page of [englishPage, spanishPage]) {
       const contactForm = page.querySelector('.contact-form')
       const contactFrom = contactForm.querySelector('[id^=contact-from]')
@@ -1357,6 +1368,10 @@
           })
       }
     }
+    */
   </script>
+
+  <!-- Tally form -->
+  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
 </body>
 </html>
