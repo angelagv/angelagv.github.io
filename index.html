@@ -602,7 +602,7 @@
     }
 
     section h2::before {
-      content: ’’;
+      content: '';
       height: 10px;
       width: calc(100% + 10px);
       border-radius: 16px;
@@ -1127,41 +1127,41 @@
 
   <script>
     const { body } = document
-    const englishPage = document.querySelector(’main[lang=en]’)
-    const spanishPage = document.querySelector(’main[lang=es]’)
+    const englishPage = document.querySelector('main[lang=en]')
+    const spanishPage = document.querySelector('main[lang=es]')
     const belowFoldSections = document.querySelectorAll(`section:not(.intro)`)
 
     for (const page of [englishPage, spanishPage]) {
-      const servicesTitles = Array.from(page.querySelectorAll(’.services-titles li’))
-      const servicesDescription = Array.from(page.querySelectorAll(’.services-descriptions li’))
+      const servicesTitles = Array.from(page.querySelectorAll('.services-titles li'))
+      const servicesDescription = Array.from(page.querySelectorAll('.services-descriptions li'))
 
-      servicesTitles[0].classList.add(’selected’)
-      servicesDescription[0].classList.add(’selected’)
+      servicesTitles[0].classList.add('selected')
+      servicesDescription[0].classList.add('selected')
 
       servicesTitles.forEach((title, titleIdx) => {
         function onServiceTitleSelected() {
           for (let i = 0; i < servicesTitles.length; ++i) {
-            servicesTitles[i].classList.remove(’selected’)
-            servicesDescription[i].classList.remove(’selected’)
+            servicesTitles[i].classList.remove('selected')
+            servicesDescription[i].classList.remove('selected')
           }
-          servicesTitles[titleIdx].classList.add(’selected’)
-          servicesDescription[titleIdx].classList.add(’selected’)
+          servicesTitles[titleIdx].classList.add('selected')
+          servicesDescription[titleIdx].classList.add('selected')
         }
 
         title.onclick = onServiceTitleSelected
         title.onkeypress = ev => {
-          if (ev.key === ’Enter’ || ev.code === ’Enter’)
+          if (ev.key === 'Enter' || ev.code === 'Enter')
             onServiceTitleSelected()
         }
       })
     }
 
-    for (const anchor of document.querySelectorAll(`a[href^=’#’]`)) {
+    for (const anchor of document.querySelectorAll(`a[href^='#']`)) {
       anchor.onclick = ev => {
         ev.preventDefault()
         document
-          .querySelector(’main:not([hidden]) ’ + anchor.getAttribute(’href’))
-          .scrollIntoView({ behavior: ’smooth’ })
+          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href'))
+          .scrollIntoView({ behavior: 'smooth' })
       }
     }
 
@@ -1176,19 +1176,19 @@
         document.documentElement.scrollLeft = 0
     }
 
-    englishPage.querySelector(’.lang-button’).onclick = () => {
+    englishPage.querySelector('.lang-button').onclick = () => {
       hideBelowFoldSections()
-      englishPage.style.overflowY = ’hidden’ // Hide left scrollbar before sliding.
+      englishPage.style.overflowY = 'hidden' // Hide left scrollbar before sliding.
       spanishPage.hidden = false
-      setUrlLang(’es’, false)
+      setUrlLang('es', false)
       slideToSpanishPage()
     }
 
-    spanishPage.querySelector(’.lang-button’).onclick = () => {
+    spanishPage.querySelector('.lang-button').onclick = () => {
       hideBelowFoldSections()
-      englishPage.style.overflowY = ’hidden’ // Hide left scrollbar before sliding.
+      englishPage.style.overflowY = 'hidden' // Hide left scrollbar before sliding.
       englishPage.hidden = false
-      setUrlLang(’en’, false)
+      setUrlLang('en', false)
       slideToEnglishPage()
     }
 
@@ -1213,11 +1213,11 @@
     }
 
     function renderEnglishPage() {
-      englishPage.style.overflowY = ’scroll’
+      englishPage.style.overflowY = 'scroll'
       englishPage.hidden = false
       spanishPage.hidden = true
       bodyShift = 0
-      body.style.left = ’’ + bodyShift
+      body.style.left = '' + bodyShift
       showBelowFoldSections()
       connectAllTimelineBullets(englishPage)
       forceEnglishPageReflow()
@@ -1235,8 +1235,8 @@
     // Force a reflow so that Safari takes into account the scrollbar
     // when calculating the layout in the same way as after a refresh.
     function forceEnglishPageReflow() {
-      englishPage.style.width = ’99.99999vw’
-      setTimeout(() => englishPage.style.width = ’100vw’)
+      englishPage.style.width = '99.99999vw'
+      setTimeout(() => englishPage.style.width = '100vw')
     }
 
     function showBelowFoldSections() {
@@ -1251,11 +1251,11 @@
 
     function renderPageBasedOnUrl() {
       const queryParams = new URLSearchParams(window.location.search)
-      const urlLang = queryParams.get(’lang’)
+      const urlLang = queryParams.get('lang')
       if (!urlLang)
-        setUrlLang(’en’, true)
+        setUrlLang('en', true)
 
-      if (urlLang === ’es’)
+      if (urlLang === 'es')
         renderSpanishPage()
       else
         renderEnglishPage()
@@ -1263,67 +1263,67 @@
 
     function setUrlLang(lang, replace) {
       const queryParams = new URLSearchParams(window.location.search)
-      queryParams.set(’lang’, lang)
-      history[replace ? ’replaceState’ : ’pushState’](
+      queryParams.set('lang', lang)
+      history[replace ? 'replaceState' : 'pushState'](
         null,
-        `Ángela G. V. – ${lang === ’en’ ? ’English’ : ’Spanish’}`,
-        ’?’ + queryParams.toString()
+        `Ángela G. V. – ${lang === 'en' ? 'English' : 'Spanish'}`,
+        '?' + queryParams.toString()
       )
     }
 
     function connectAllTimelineBullets(context) {
       connectLeftToRightTimelineBullets(context)
       connectRightToLeftTimelineBullets(context)
-      connectStraightTimelineBullets(context.querySelector(’.courses-list’))
-      connectStraightTimelineBullets(context.querySelector(’.experience-list’))
+      connectStraightTimelineBullets(context.querySelector('.courses-list'))
+      connectStraightTimelineBullets(context.querySelector('.experience-list'))
     }
 
     function connectStraightTimelineBullets(context) {
-      const bullets = Array.from(context.querySelectorAll(’.bullet’))
-      const bulletConnectionSvgs = Array.from(context.querySelectorAll(’.bullet-connection’))
-      const bulletConnectionPaths = Array.from(context.querySelectorAll(’.bullet-connection path’))
+      const bullets = Array.from(context.querySelectorAll('.bullet'))
+      const bulletConnectionSvgs = Array.from(context.querySelectorAll('.bullet-connection'))
+      const bulletConnectionPaths = Array.from(context.querySelectorAll('.bullet-connection path'))
 
       for (let i = 0; i < bullets.length - 1; ++i) {
         const diff = bullets[i + 1].getBoundingClientRect().top - bullets[i].getBoundingClientRect().top
-        bulletConnectionSvgs[i].setAttribute(’height’, `${diff + 40}px`)
-        bulletConnectionPaths[i].setAttribute(’d’, `M 20 20 L 20 ${diff + 20}`)
+        bulletConnectionSvgs[i].setAttribute('height', `${diff + 40}px`)
+        bulletConnectionPaths[i].setAttribute('d', `M 20 20 L 20 ${diff + 20}`)
       }
     }
 
     function connectLeftToRightTimelineBullets(context) {
-      const connections = context.querySelectorAll(’.left-to-right-connection’)
+      const connections = context.querySelectorAll('.left-to-right-connection')
 
       for (const connection of connections) {
-        const bullet = connection.querySelector(’.bullet’)
-        const bulletConnectionSvg = connection.querySelector(’.bullet-connection’)
-        const bulletConnectionPath = connection.querySelector(’.bullet-connection path’)
+        const bullet = connection.querySelector('.bullet')
+        const bulletConnectionSvg = connection.querySelector('.bullet-connection')
+        const bulletConnectionPath = connection.querySelector('.bullet-connection path')
 
         const nextConnection = connection.nextElementSibling
-        const nextBullet = nextConnection.querySelector(’.bullet’)
+        const nextBullet = nextConnection.querySelector('.bullet')
 
         const diff = nextBullet.getBoundingClientRect().top - bullet.getBoundingClientRect().top
         const svgHeight = diff + 40
-        bulletConnectionSvg.setAttribute(’height’, `${svgHeight}px`)
-        bulletConnectionPath.setAttribute(’d’, `M 20 20 Q 20 ${svgHeight / 2}, 40 ${svgHeight / 2} T 60 ${svgHeight - 20}`)
+        bulletConnectionSvg.setAttribute('height', `${svgHeight}px`)
+        bulletConnectionPath.setAttribute('d', `M 20 20 Q 20 ${svgHeight / 2}, 40 ${svgHeight / 2} T 60 ${svgHeight - 20}`)
       }
     }
 
     function connectRightToLeftTimelineBullets(context) {
-      const connections = context.querySelectorAll(’.right-to-left-connection’)
+      const connections = context.querySelectorAll('.right-to-left-connection')
 
       for (const connection of connections) {
-        const bullet = connection.querySelector(’.bullet’)
-        const bulletConnectionSvg = connection.querySelector(’.bullet-connection’)
-        const bulletConnectionPath = connection.querySelector(’.bullet-connection path’)
+        const bullet = connection.querySelector('.bullet')
+        const bulletConnectionSvg = connection.querySelector('.bullet-connection')
+        const bulletConnectionPath = connection.querySelector('.bullet-connection path')
 
         const nextConnection = connection.nextElementSibling
-        const nextBullet = nextConnection.querySelector(’.bullet’)
+        const nextBullet = nextConnection.querySelector('.bullet')
 
         const diff = nextBullet.getBoundingClientRect().top - bullet.getBoundingClientRect().top
         const svgHeight = diff + 40
-        bulletConnectionSvg.setAttribute(’height’, `${svgHeight}px`)
-        bulletConnectionPath.setAttribute(’d’, `M 20 20 Q 20 ${svgHeight / 2}, 40 ${svgHeight / 2} T 60 ${svgHeight - 20}`)
-        bulletConnectionPath.setAttribute(’d’, `M 60 20 Q 60 ${svgHeight / 2}, 40 ${svgHeight / 2} T 20 ${svgHeight - 20}`)
+        bulletConnectionSvg.setAttribute('height', `${svgHeight}px`)
+        bulletConnectionPath.setAttribute('d', `M 20 20 Q 20 ${svgHeight / 2}, 40 ${svgHeight / 2} T 60 ${svgHeight - 20}`)
+        bulletConnectionPath.setAttribute('d', `M 60 20 Q 60 ${svgHeight / 2}, 40 ${svgHeight / 2} T 20 ${svgHeight - 20}`)
       }
     }
   </script>
@@ -1332,46 +1332,46 @@
   <script>
     /*
     for (const page of [englishPage, spanishPage]) {
-      const contactForm = page.querySelector(’.contact-form’)
-      const contactFrom = contactForm.querySelector(’[id^=contact-from]’)
-      const contactBody = contactForm.querySelector(’[id^=contact-body]’)
-      const contactSendBtn = contactForm.querySelector(’button[type=submit]’)
-      const contactLoader = contactForm.querySelector(’.contact-loader’)
-      const contactSubmitText = contactForm.querySelector(’.submit-text’)
-      const contactResult = page.querySelector(’.contact-result’)
+      const contactForm = page.querySelector('.contact-form')
+      const contactFrom = contactForm.querySelector('[id^=contact-from]')
+      const contactBody = contactForm.querySelector('[id^=contact-body]')
+      const contactSendBtn = contactForm.querySelector('button[type=submit]')
+      const contactLoader = contactForm.querySelector('.contact-loader')
+      const contactSubmitText = contactForm.querySelector('.submit-text')
+      const contactResult = page.querySelector('.contact-result')
 
-      emailjs.init(’user_xCTlsMd4WvYzCuEwWqCc7’)
+      emailjs.init('user_xCTlsMd4WvYzCuEwWqCc7')
 
       let contactResultTimer
 
       contactForm.onsubmit = ev => {
         ev.preventDefault()
         clearTimeout(contactResultTimer)
-        contactResult.classList.remove(’active’)
+        contactResult.classList.remove('active')
 
         contactSendBtn.disabled = true
         contactSubmitText.hidden = true
         contactLoader.hidden = false
 
         emailjs
-          .send(’rlIdkOSgYe0ZgbpgfRmzDLyU’, ’3OSLQf2VuXRCGsRfHNbd7G0I’, {
+          .send('rlIdkOSgYe0ZgbpgfRmzDLyU', '3OSLQf2VuXRCGsRfHNbd7G0I', {
             reply_to: contactFrom.value,
             message: contactBody.value
           })
           .then(() => {
-            contactFrom.value = contactBody.value = ’’
-            contactResult.textContent = ’Message sent! I will read it soon 🙂’
-            contactResult.classList.add(’active’)
+            contactFrom.value = contactBody.value = ''
+            contactResult.textContent = 'Message sent! I will read it soon 🙂'
+            contactResult.classList.add('active')
           })
           .catch(() => {
-            contactResult.textContent = ’Sorry, your message could not be delivered 🙁’
-            contactResult.classList.add(’active’)
+            contactResult.textContent = 'Sorry, your message could not be delivered 🙁'
+            contactResult.classList.add('active')
           })
           .finally(() => {
             contactSendBtn.disabled = false
             contactSubmitText.hidden = false
             contactLoader.hidden = true
-            contactResultTimer = setTimeout(() => contactResult.classList.remove(’active’), 5_000)
+            contactResultTimer = setTimeout(() => contactResult.classList.remove('active'), 5_000)
           })
       }
     }
@@ -1379,6 +1379,6 @@
   </script>
 
   <!-- Tally form -->
-  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector(’script[src="’+w+’"]’)==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
 </body>
 </html>
