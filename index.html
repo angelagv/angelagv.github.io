@@ -563,7 +563,10 @@
     }
 
     #intro > article,
-    #outro > article { max-width: 750px }
+    #outro > article {
+      max-width: 750px;
+      padding: 0 5vw;
+    }
 
     #intro,
     #outro {
@@ -607,8 +610,6 @@
     }
 
     #intro > article {
-      padding: 0 5vw;
-
       > img {
         margin-bottom: 25px;
         border-radius: 50%;
@@ -791,7 +792,7 @@
       }
 
       > li > time {
-        padding: 2px 6px 3px 6px;
+        padding: 3px 6px;
         border-radius: 6px;
         font-size: 0.7rem;
         font-weight: 600;
@@ -870,9 +871,10 @@
     for (const anchor of body.querySelectorAll(`a[href^='#']`)) {
       anchor.onclick = ev => {
         ev.preventDefault()
-        location.hash = ev.target.closest('a').getAttribute('href')
+        const href = anchor.getAttribute('href')
+        location.hash = href
         body
-          .querySelector('main:not([hidden]) ' + anchor.getAttribute('href'))
+          .querySelector('main:not([hidden]) ' + href)
           .scrollIntoView({ behavior: 'smooth' })
       }
     }
@@ -894,23 +896,15 @@
     function renderPageBasedOnUrl() {
       const queryParams = new URLSearchParams(window.location.search)
       const urlLang = queryParams.get('lang')
-      if (!urlLang)
-        setUrlLang('en', true)
+      if (!urlLang) {
+        queryParams.set('lang', 'en')
+        history.replaceState(null, '', '?' + queryParams.toString())
+      }
 
       if (urlLang === 'es')
         renderSpanishPage()
       else
         renderEnglishPage()
-    }
-
-    function setUrlLang(lang, replace) {
-      const queryParams = new URLSearchParams(window.location.search)
-      queryParams.set('lang', lang)
-      history[replace ? 'replaceState' : 'pushState'](
-        null,
-        `Ángela G. V. – ${lang === 'en' ? 'English' : 'Spanish'}`,
-        '?' + queryParams.toString()
-      )
     }
   </script>
 
