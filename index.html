@@ -9,7 +9,7 @@
 <body>
   <script>
     const queryParams = new URLSearchParams(window.location.search)
-    document.documentElement.lang = queryParams.get('lang')
+    document.documentElement.lang = queryParams.get('lang') || 'en'
   </script>
 
   <style>
