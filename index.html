@@ -6,7 +6,7 @@
   <title>Ángela G. V.</title>
   <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👩🏻‍💻</text></svg>'>
 <body>
-  <main lang="en" hidden>
+  <main lang="en">
     <section id="introduction" class="intro">
       <a href="?lang=es" hreflang="es" title="Ver página en español">
         <span>🇪🇸</span>&nbsp;ES<span>❯</span>
@@ -251,7 +251,7 @@
     </section>
   </main>
 
-  <main lang="es" hidden>
+  <main lang="es">
     <section id="introduccion" class="intro">
       <a href="?lang=en" hreflang="en" title="Go to English version">
         <span>🇬🇧</span>&nbsp;EN<span>❯</span>
@@ -511,7 +511,7 @@
 
     .rounded { border-radius: 6px }
 
-    .secondary-text { color: #808080 !important }
+    .secondary-text { color: #777 !important }
 
     ::selection { background-color: #ab6bb044 }
 
@@ -529,6 +529,9 @@
     body,
     input,
     textarea { font-family: system-ui, sans-serif }
+
+    html[lang=en] main[lang=es] { display: none }
+    html[lang=es] main[lang=en] { display: none }
 
     main > section {
       &:not(.intro, .outro) {
@@ -581,7 +584,7 @@
       text-shadow: 0 1px 5px rgb(0 0 0 / 40%);
 
       > svg {
-        width: calc(100% + 2px); /* Safari leaves pixels between the curved paths and the page boundaries. */
+        width: calc(100% + 2px);
         position: relative;
         left: -1px;
 
@@ -720,7 +723,7 @@
 
         > li.selected {
           background-color: #ab6bb044;
-          color: #111;
+          color: #000;
         }
       }
 
@@ -746,13 +749,10 @@
         text-align: center;
         border-radius: 6px;
         color: inherit;
-        background-color: #eaeaea;
+        background-color: #ab6bb022;
         filter: grayscale(100%);
 
-        &:hover {
-          filter: none;
-          background-color: #ab6bb022;
-        }
+        &:hover { filter: none }
 
         > img {
           vertical-align: -6px;
@@ -812,12 +812,12 @@
         margin: 5px 0 0 0;
         font-size: 0.95rem;
         font-weight: 400;
-        color: #333;
+        color: #222;
       }
 
       > li > p {
         line-height: 150%;
-        color: #333;
+        color: #222;
 
         &:last-child { margin-bottom: 0 }
       }
@@ -829,7 +829,7 @@
         gap: 5px;
         padding-left: 15px;
         line-height: 150%;
-        color: #333;
+        color: #222;
       }
 
       > li a {
@@ -841,9 +841,11 @@
   </style>
 
   <script>
-    const { body } = document
-    const englishPage = body.querySelector('main[lang=en]')
-    const spanishPage = body.querySelector('main[lang=es]')
+    const queryParams = new URLSearchParams(window.location.search)
+    document.documentElement.lang = queryParams.get('lang')
+
+    const englishPage = document.body.querySelector('main[lang=en]')
+    const spanishPage = document.body.querySelector('main[lang=es]')
 
     for (const page of [englishPage, spanishPage]) {
       const servicesContent = page.querySelector('.services > article')
@@ -869,34 +871,6 @@
             onServiceTitleSelected()
         }
       })
-    }
-
-    renderPageBasedOnUrl()
-    window.onpopstate = renderPageBasedOnUrl
-    window.onresize = renderPageBasedOnUrl
-
-    function renderEnglishPage() {
-      englishPage.hidden = false
-      spanishPage.hidden = true
-    }
-
-    function renderSpanishPage() {
-      englishPage.hidden = true
-      spanishPage.hidden = false
-    }
-
-    function renderPageBasedOnUrl() {
-      const queryParams = new URLSearchParams(window.location.search)
-      const urlLang = queryParams.get('lang')
-      if (!urlLang) {
-        queryParams.set('lang', 'en')
-        history.replaceState(null, '', '?' + queryParams.toString())
-      }
-
-      if (urlLang === 'es')
-        renderSpanishPage()
-      else
-        renderEnglishPage()
     }
   </script>
 
