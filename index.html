@@ -63,26 +63,19 @@
       > article > h2 > a {
         font-size: 1.4rem;
         font-weight: 400;
-        position: relative;
         color: inherit;
-
-        &::before {
-          content: '';
-          height: 10px;
-          width: calc(100% + 10px);
-          border-radius: 5px;
-          position: absolute;
-          left: -5px;
-          bottom: 0;
-          z-index: -1;
-          background-color: #e0cde1;
-        }
+        text-decoration-line: underline;
+        text-decoration-thickness: 0.4em;
+        text-decoration-skip-ink: none;
+        text-decoration-color: #e0cde1;
+        text-underline-offset: -0.18em;
 
         > i {
           line-height: 0;
-          margin-left: 4px;
           position: relative;
           top: -2px;
+
+          &::before { content: '\202F' }
         }
       }
     }
@@ -189,8 +182,7 @@
 
         > a {
           font-weight: 500;
-
-          &::before { background-color: #e0cde144 }
+          text-decoration-line: none;
         }
       }
 
@@ -389,7 +381,7 @@
     <section id="services" class="services">
       <h2>
         <a href="#services">
-          Here are the main <strong>services</strong> I provide <i>🙇</i>
+          &nbsp;Here are the main <strong>services</strong> I provide&nbsp;<i>🙇</i>&nbsp;
         </a>
       </h2>
       <article>
@@ -411,7 +403,7 @@
     <section id="education">
       <h2>
         <a href="#education">
-          If you are wondering, I got my <strong>education</strong> from <i>🎓</i>
+          &nbsp;If you are wondering, I got my <strong>education</strong> from&nbsp;<i>🎓</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -436,7 +428,7 @@
     <section id="courses">
       <h2>
         <a href="#courses">
-          And I intend to keep learning, so I’ve also done these <strong>courses</strong> <i>📚</i>
+          &nbsp;And I intend to keep learning, so I’ve also done these <strong>courses</strong>&nbsp;<i>📚</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -466,7 +458,7 @@
     <section id="experience">
       <h2>
         <a href="#experience">
-          Here is my <strong>professional experience</strong> so far <i>👵</i>
+          &nbsp;Here is my <strong>professional experience</strong> so far&nbsp;<i>👵</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -509,7 +501,7 @@
     <section id="tools" class="tools">
       <h2>
         <a href="#tools">
-          These are some of the <strong>tools</strong> I’ve used <i>🛠</i>
+          &nbsp;These are some of the <strong>tools</strong> I’ve used&nbsp;<i>🛠</i>&nbsp;
         </a>
       </h2>
       <ul>
@@ -589,7 +581,7 @@
       <article>
         <h2 id="contact">
           <a href="#contact">
-            Reach out! <i>📝</i>
+            Reach out! <i>✉️</i>
           </a>
         </h2>
         <p>Got a project you might want me to collaborate on? Any questions about my services and what I’m able to do? This is your chance! Shoot me a message and let’s chat. And don’t worry if what you’re looking for isn’t mentioned or included in this page, because it never hurts to ask, and I’m always happy to learn and work on new stuff!</p>
@@ -613,8 +605,7 @@
       <article>
         <img src="portrait.jpg" alt="Ángela’s picture" width="215" height="215">
         <h1>
-          Hola, soy Ángela
-          <i>🖐</i>
+          Hola, soy Ángela <i>🖐</i>
         </h1>
         <p>
           Trabajo como traductora profesional del inglés, francés y gallego al español. Me crié en Galicia, España, y mi amor por los idiomas hizo que acabase estudiando en la Facultad de Traducción e Interpretación de la Universidad de Ginebra, mientras vivía en Francia al otro lado de la frontera. Con mi trayectoria en comunicación, <em>marketing</em> y redes sociales, y más de ocho años de experiencia con organizaciones sin ánimo de lucro, creo fervientemente en el poder del lenguaje como motor del cambio. Los proyectos creativos son música para mis oídos, por eso me encantan la transcreación y la traducción literaria. También soy cantante y música, y me encanta aprender cosas nuevas de forma constante, así que tengo una lista de <em>hobbies</em> generosa, como la lectura, la repostería con masa madre, el punto o la jardinería.
@@ -634,7 +625,7 @@
     <section id="servicios" class="services">
       <h2>
         <a href="#servicios">
-          No soy <em>superwoman</em>, pero sí ofrezco varios <strong>servicios</strong> <i>🙇</i>
+          &nbsp;No soy <em>superwoman</em>, pero sí ofrezco varios <strong>servicios</strong>&nbsp;<i>🙇</i>&nbsp;
         </a>
       </h2>
       <article>
@@ -656,7 +647,7 @@
     <section id="educacion">
       <h2>
         <a href="#educacion">
-          Como seguro que te mueres por saberlo, este es mi <strong>historial educativo</strong> <i>🎓</i>
+          &nbsp;Como seguro que te mueres por saberlo, este es mi <strong>historial educativo</strong>&nbsp;<i>🎓</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -681,7 +672,7 @@
     <section id="cursos">
       <h2>
         <a href="#cursos">
-          No pienso dejar de aprender, así que he ido haciendo estos <strong>cursos</strong> <i>📚</i>
+          &nbsp;No pienso dejar de aprender, así que he ido haciendo estos <strong>cursos</strong>&nbsp;<i>📚</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -711,7 +702,7 @@
     <section id="experiencia">
       <h2>
         <a href="#experiencia">
-          Esto se ha estado cociendo en mi <strong>experiencia profesional</strong> estos años <i>👵</i>
+          &nbsp;Esto se ha estado cociendo en mi <strong>experiencia profesional</strong> estos años&nbsp;<i>👵</i>&nbsp;
         </a>
       </h2>
       <ol class="timeline">
@@ -754,7 +745,7 @@
     <section id="herramientas" class="tools">
       <h2>
         <a href="#herramientas">
-          Estas son algunas de las <strong>herramientas</strong> que he usado para mi trabajo <i>🛠</i>
+          &nbsp;Estas son algunas de las <strong>herramientas</strong> que he usado para mi trabajo&nbsp;<i>🛠</i>&nbsp;
         </a>
       </h2>
       <ul>
@@ -834,7 +825,7 @@
       <article>
         <h2 id="contacto">
           <a href="#contacto">
-            Contáctame <i>📝</i>
+            Contáctame <i>✉️</i>
           </a>
         </h2>
         <p>¿Quieres colaborar en algún proyecto? ¿Tienes alguna pregunta sobre mis servicios que no ves respondida en mi página? ¡Adelante! No dudes en contactarme para lo que sea. Aunque sea algo no mencionado en esta página, seguro que podemos hablarlo.</p>
